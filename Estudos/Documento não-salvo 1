@@ -1,2 +1,567 @@
-teste para projeto
+#UNTRACKED: são arquivos que o git ainda nao tem ciencia deles
+#TRACKED: são os arquivos que o git tem ciencia
+#UNMODIFIED: arquivo ainda nao foi modificado
+#MODIFIED: arquivo que sofreu modificação
+#STAGED: é o arquivo que estao se preparando para fazer parte de um outro tipo de agrupamento
+
+____________________________________________________________________
+
+#MOVER O ARQUIVO de UNTRACKED PARA STAGED (isso sao as modificações de estados/status dos arquivos)
+
+git add nomeAquivo
+git add *
+git add. 
+
+'Siginifica que adiciona todas as modificações do repositorio local para a staged area,
+a gente ta movendo o arquivo UNTRACKED direto para Staged
+e ta pegando os arquivos modificados e movendo para Staged
+está colocando os arquivos que vai entrar em ação
+
+#comando git commit -m " 'aqui escreve uma mensagem' "
+
+$ git commit -m "adiciona index"
+
+'Siginifica pegou toda essa área, pegou todos os arquivos que estavam em Staged envelopou
+em uma mensagem dando significancia a eles e criou esse objeto no GIT, chamado commit
+
+_________________________________________________________________
+#CRIAR UM DIRETORIO REMOTE
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ ls
+README.md  receitas/
+
+_________________________________________________________________
+
+#Toda vez que eu modificar o arquivo, e eu salvar e quiser que ele modifique de unmodified
+para staged eu tenho que dar o comando git add *
+
+e ai preciso criar um commit para essa alteração e designar um título para essa modificação
+vou usar o comando git commit -m "Adiciona receita Mousse de Maracujá"
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ git add *
+
+_________________________________________________________________
+
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@Nagila-Dev 
+Deisiane-Cuellar
+/
+Desafio-Github-DIO
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Desafio-Github-DIO/Anotacoes - Curso GIT.vb
+@Deisiane-Cuellar
+Deisiane-Cuellar Anotacoes - Curso GIT/GITHUB
+Latest commit 921a4fb 2 days ago
+ History
+ 1 contributor
+524 lines (367 sloc)  16.8 KB
+
+#Repositório é seu projeto
+Diretório é pasta
+
+windows - comando terminal
+
+cd - navega entre as pastas
+digita: cd / 	(ele vai levar pra base do diretorio C, dir - digitar dir no cmd ele vai dar 
+uma lista de diretórios contidos na pasta na qual está situado) o cd / ele leva para um local
+específico no sistema
+__________________________________________________________________
+e quiser ir para uma pasta do windows
+digita cd windows
+
+C:\>cd windows (vai abrir o windows)
+
+C:\Windows> dir (vai abrir toda a lista de arquivos/programas/etc que tem na pasta C do windows)
+
+
+
+#para voltar para dentro da base do repositório comando vai digitar: cd .. 
+(CD e dois pontos sem espaço)
+
+C:\Windows>cd..
+
+C:\>
+
+#COMANDO PARA LIMPAR TELA: CLS
+
+C:\>cls
+
+#digitar CD e + tab: ele vai autopreencher a palavra
+
+#CRIAR UMA PASTA É O COMANDO: mkdir
+Vai digir o mkdir e digitar o nome da pasta que quer criar
+
+C:\>mkdir worspace
+
+__________________________________________________________________
+
+#PARA NAVEGAR PARA DENTRO DA PASTA WORSPACEVAI DIGITAR: cd worspace
+C:\>cd worspace
+C:\worspace>
+
+#CRIAR ARQUIVO
+Vai digitar: echo 	(que vai printar de volta no terminal uma frase, texto, etc que vc passa)
+exemplo:
+
+C:\worspace>echo hello
+hello
+
+C:\worspace>
+
+#REDIRECIONADOR DE FLUXO: vai utilizar o >
+ele vai pegar o > que é um redirecionador de fluxo, ele vai pegar o out put (a saída da
+função eco e vai jogar em um arquivo - criar arquivo. o comando abaixo ele vai procurar
+se tem uma pasta com o nome hello.txt, caso nao tenha ele vai criar 
+exemplo
+
+
+C:\worspace>echo hello > hello.txt
+
+__________________________________________________________________
+
+#COMANDO: del 
+(deletar o que contem dento da pasta/arquivo)
+exemplo:
+
+C:\>del worspace
+C:\worspace\*, Are you sure (Y/N)? y
+
+C:\>
+
+C:\>cd worspace
+
+C:\worspace>dir
+ Volume in drive C has no label.
+ 
+ __________________________________________________________________
+ 
+ #COMANDO: rmdir
+(Para deletar o repositório)
+
+C:\>rmdir worspace /s /q
+
+C:\>dir
+ Volume Serial Number is ECAA-154F
+
+ Directory of C:\
+ 
+ __________________________________________________________________
+ 
+ ##TÓPICOS
+- SHA1: A sigla SHA1 significa Secure Hash Algorithm (Algoritmo de Hash Seguro), é um
+conjunto de funções hash criptográficas projetadas pela NSA (Agência de Seg Nacional dos EUA)
+ele vai pegar o arquivo e embaralhar de uma forma específica. A encriptação gera um conjunto
+de caracteres indentificador de 40 digitos (é unico e serve como identicação)
+toda vez que eu fizer uma alteração no arquivo ele irá criar uma chave diferente
+
+
+- OBJETOS FUNDAMENTAIS: BLOB, TREE, COMMIT
+
+- SISTEMA DISTRIBUÍDO SEGURO: Na máquina/usuarios tem uma versao do codigo. 
+
+- SEGURANÇA
+____________________________________________________________________
+
+## SHA1
+Criando umA SHA1
+Criei um arquivo no bloco de notas e salvei com o nome 'nomes' e salvei na área de trabalho
+
+#COMANDO NO GIT:
+deisi@FER-PC MINGW64 ~/OneDrive/Área de Trabalho
+$ openssl sha1 nomes.txt
+
+__________________________________________________________________
+# Vou editar o arquivo e salvar novamente e vai gerar outra SHA1
+
+deisi@FER-PC MINGW64 ~/OneDrive/Área de Trabalho
+$ openssl sha1 nomes.txt
+
+__________________________________________________________________
+# OBJETOS INTERNOS DO GIT
+
+- BLOBS
+- TREES
+- COMMITS
+
+#OBJETOS BLOBS
+ENCAPSULA os comportamentos dos objetos do diretório, usado para apontar para diretórios
+que contém arquivos.
+EXEMPLO1: Vai passar para uma função do GIT, a função HASH - A função --STDIN espera
+receber um arquivo
+__________________________________________________________________
+
+Por que gera chaves diferentes?
+Porque esses objetos específicos, a forma que o GIT lida com eles, manipula.. é através
+de objetos. Os arquivos desses ficam guardados dentro desse objeto chamado ##BLOB
+e este objeto contém metadados dentro dele.
+BLOB estrutura: vai ter o tipo do objeto, o tamanho, uma \0 e o conteúdo:
+
+____________________________________________________________________
+#BJETOS TREE (ARVORES)
+Elas armazenam BLOB, é uma crescente, o BLOB é um bloco básico de composição
+A TREE Apontando e armazenando tipos de BLOB diferentes. O blob nao guarda o nome do arquivo
+A TREE será responsável por montar toda a estrutura de onde estão os arquivos, onde estão localizados
+UMA TREE pode apontar para outra TREE, assim como um diretório pode apontar para outro diretório
+OS BLOBs tem o SHA1 Do arquivo. AS TREES Apontam para esses BLOBS e teM um SHA1 Das TREES
+Se mudar um arquivo, por consequencia vai esta mudando toda a estrutura/encriptação da TREE tbm
+
+Ela contem tbm metadados.
+contem: \0	; SHA1	; Nome do ARQUIVO
+
+____________________________________________________________________
+#OBJETOS COMMIT
+É um objeto que vai juntar tudo, que vai dar sentido para a alteração que ta fazendo
+ele aponta para uma árvore, aponta para um parente (o ultimo commit realizado), aponta
+para um autor e mensagem
+
+Você pode escrever uma mensagem dentro desse objeto commit, que vai ta explicando e 
+dando significado para esse monte de arquivo e pastas.
+E esse objeto leva o nome do autor (do Usuário que criou)
+o COMMIT tem um time (carimbo de tempo: data, hora de quando foi criado)
+Tbm possuem uma SHA1, Significa que se vc alterar uma BLOB ele vai gerar um SHA1 da BLOB, da TREE, e da COMMIT
+
+____________________________________________________________________
+
+###PRIMEIROS COMANDOS DO GIT
+
+-CHAVES SSH: uma forma de estabelecer uma conexão segura entre duas máquinas (máquina local com o github)
+vai ter uma chave pública e uma chave privada.
+
+Criando CHAVE SSH DO GITHUB
+
+__________________________________________________________________
+
+Iniciar o repositório no GIT: git init
+Mover arquivo e direcionamento: git add
+Criar commit: git commit
+
+Quando está lidando com terminal, sempre coloca o nome do comando na frente
+está chamando pelo terminal GIT, por isso todo comando leva a palavra git na frente
+
+____________________________________________________________________
+NO GIT 
+Dentro da pasta do Disco local C: Users: Deisi
+Vai abrir com o botao direito GIT BASH HERE
+Digitar o camando LS para listar as pastas
+-> PARA ABRIR A PASTA:  Digitar CD WORKSPACE/
+-> PARA CRIAR UMA PASTA: MKDIR Livro de Receitas
+PARA LIMPAR A TELA CTRL+L
+##->COMANDO PARA INICIAR O DIRECIONAMENTO DA PASTA:
+git init
+
+deisi@FER-PC MINGW64 ~/workspace
+$ git init
+
+
+__________________________________________________________________
+
+# Flag que mostra pastas ocultas
+ls -a 
+
+deisi@FER-PC MINGW64 ~/workspace (master)
+$ ls -a
+./  ../  .git/  Livro/  Receitas/  de/  livro-receitas/
+
+deisi@FER-PC MINGW64 ~/workspace (master)
+$
+
+#ENTRAR NA PASTA COMANDO
+cd .GIT/
+
+deisi@FER-PC MINGW64 ~/workspace (master)
+$ cd .git/
+
+deisi@FER-PC MINGW64 ~/workspace/.git (GIT_DIR!)
+$ ls
+HEAD  config  description  hooks/  info/  objects/  refs/
+
+deisi@FER-PC MINGW64 ~/workspace/.git (GIT_DIR!)
+$
+
+#CRIAR O PRIMEIRO ARQUIVO DENTRO DA PASTA LIVRO DE RECEITAS
+MAS É PRECISO CRIAR UMA CONFIGURAÇÃO INICIAL
+CRIAR UM USER NAME,NICK OU EMAIL, PARA GERAR O COMMIT QUE É O QUE VAI FICAR REGISTRADO
+NO SEU NOME - AUTOR
+
+COMANDO: 
+deisi@FER-PC MINGW64 ~/workspace/livro-receitas (master)
+$ git config --global user.email "
+
+__________________________________________________________________
+#CRIAR O NAME>
+deisi@FER-PC MINGW64 ~/workspace/livro-receitas (master)
+$ git config --global user.name
+
+__________________________________________________________________
+
+#ARQUIVO MARKDOWN É UMA FORMA MAIS UMA DE ESCREVER UM ARQUIVO HTML, 
+ARQUIVO HTML É O ESQUELETO, UMA ESTRUTURA BASICA DE QQ PAGINA NA WEB
+
+EM MARKDOWN (Arquivo md): é uma forma humanizada de se escrever HTML sem que vc tenha que 
+entender como o HTML funciona de fato. Fica melhor que a estetica melhor 
+# Titulo nível 1
+## Titulo nível 2
+### Titulo nível 3
+#### Titulo nível 4
+##### Titulo nível 5
+###### Titulo nível 6
+
+EM NAVEGADOR
+Título nível 1
+Título nível 2
+Título nível 3
+Título nível 4
+Título nível 5
+Título nível 6
+
+EM HTML
+<h1> Título nível 1 </h1>
+<h2> Título nível 2 </h2>
+<h3> Título nível 3 </h3>
+<h4> Título nível 4 </h4>
+<h5> Título nível 5 </h5>
+<h6> Título nível 6 </h6>
+
+
+
+ATALHOS TYPORA
+# PARA O AUMENTO DA LETRA
+** ** - Texto dentro dos dois asteriscos,vai ficar em negrito
+_ _ 	texto dentro dos doois underline , vai ficar em itálico
+
+#PARA CRIAR UM EMOTICON COMEÇA COM : 'digita o nome do emotion' e fecha com o :
+# Livro de receitas :woman_cook:
+____________________________________________________________________
+
+GERAR O PRIMEIRO COMANDO E CRIAR UM COMMIT INICIAL
+#Na linha que começacom [master (root-comit) 4bfbf2d] - esses numeros sao o ínicio
+dos caracteres do SHA1;
+1 file changed (significa 1 arquivo modificado)
+12 inserções
+bolo.md significa o nome do arquivo
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ git add *
+
+__________________________________________________________________
+
+GIT init - criar o comando .git 
+inicializa o conceito do git do repositorio, quando usamos o git init, criando um repositorio
+no git no diretorio, naquele diretório (pasta)
+quando usamos o comando git init - criamos o repositório (projeto)
+
+#UNTRACKED: são arquivos que o git ainda nao tem ciencia deles
+#TRACKED: são os arquivos que o git tem ciencia
+#UNMODIFIED: arquivo ainda nao foi modificado
+#MODIFIED: arquivo que sofreu modificação
+#STAGED: é o arquivo que estao se preparando para fazer parte de um outro tipo de agrupamento
+
+QUANDO USOU O COMANDO GIT ADD
+FEZ O SEGUINTE PROCESSO: A gente tinha um arquivo UNTRACKED (Tinha acado de criar), o git
+ainda nao sabia da existencia dele
+QUADO USOU O COMANDO GIT ADD *
+O git moveu o arquivo bolo (UNTRACKED) direto para o STAGED, Moveu para aquela area que 
+ele está esperando por alguma coisa
+
+O arquivo UNMODIFIED é um arquivo dentro do repositorio do git que ainda nao sofreu modificação
+dai vc abre o arquivo, modifica algo nele, dai ele muda automaticamente de UNMODIFIED para
+MODIFIED, Como vai fazer? o GIT vai comparar os SHA1 dos arquivos e vai descobrir
+que o arquivo tem modificação
+
+SE USAR O COMANDO GIT ADD * novamente 
+ele sai do STAGED vai para COMMIT onde gerou outra SHA1
+Quando ele fica no commit vai para a fase unmodified, passa para modified, staged, commit
+e continua no cliclo.
+
+____________________________________________________________________
+REPOSITORIO
+
+2 AMBIENTES
+NO AMBIENTE DESENVOLVIMENTO, vc tem seu repositorio de trabalho (bolo)
+NO AMBIENTE STAGING AREA 
+
+quando vc cria o commit, o repositorio paassa a integrar seu repositorio local, pode ser 
+empurrado para um repositorio remoto
+
+quando vc add uma arquivo UNTRACKED, que o git ainda nao tinha ciencia dele e vc
+da um git add * ele [e movido para STAGED 
+
+Quando vc comita o arquivo, vc move o arquivo que estava na area de STAGED
+ e coloca em modo UNMODIFIED.
+ TUDO O QUE ESTÁ NO SEU REPOSITORIO LOCAL ELE TEM QUE ESTAR COMITADO
+ Caso contrario vc nao consigo enviar esse arquivo para um repositorio remoto ls
+
+COMANDO GIT STATUS: ele vai dizer em qual status o arquivo está: UNTRACKED,  UNMODIFIED, 
+MODIFIED, STAGED
+
+
+____________________________________________________________________
+#MOVER ARQUIVO - COMANDO MV
+mv Bolo.txt ./receitas/
+mv README.md ./receitas/
+
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ ls
+Bolo.txt  README.md  receitas/
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ mv Bolo.txt ./receitas/
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ ls
+README.md  receitas/
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ mv README.md ./receitas/
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ ls
+receitas/
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ ls
+receitas/
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ cd receitas ####'PARA ABRIR ESSA PASTA DÁ O COMANDO CD E O NOME DA PASTA'
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas/receitas (master)
+$ ls
+Bolo.txt  README.md ####'AQUI MOSTRA OS ARQUIVOS QUE TEM DENTRO DA PASTA 'RECEITAS'
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas/receitas (master)
+$
+____________________________________________________________________
+
+#CRIAR ARQUIVO dentro de uma pasta - COMANDO ECHO >
+echo > Bolo.md 
+
+#CRIAR REPOSITORIO "PASTA"
+mkdir livro-receitas
+
+#ABRI PASTA
+cd livro-receitas
+
+#INICIAR O GIT - O GIT IRÁ COMEÇAR A MEXER NESSA PASTA, O GIT IRÁ GERENCIAR A PASTA COMANDO
+'git init'
+
+$ git init
+Initialized empty Git repository in C:/livro-receitas/.git/ ('SIGNIFICA': Foi iniciado
+'um repositorio vazio dentro de workspace -> livro-receitas -> .git 
+'essa pasta .git quando vc dá um ls, ela nao aparece, pq é uma pasta oculta gerencial do GIT
+é onde fica todo o código do GIT onde o GIT versiona todos os objetos
+
+#MOSTRAR ARQUIVOS OCULTOS: COMANDO ls -a
+deisi@FER-PC MINGW64 /c/livro-receitas (master)
+$ ls -a
+./  ../  .git/
+
+#mostrar o que tem dentro da pasta oculta '.git'
+
+deisi@FER-PC MINGW64 /c/livro-receitas (master)
+$ cd .git/ ## comando 'cd' é o que abre a pasta
+
+deisi@FER-PC MINGW64 /c/livro-receitas/.git (GIT_DIR!)
+$ ls
+HEAD  config  description  hooks/  info/  objects/  refs/
+
+__________________________________________________________________
+
+#REALIZAR UMA CONFIGURAÇÃO DENTRO DE UMA PASTA DENTRO DO GIT
+#CRIAR UM NAME, UM USUÁRIO, UM AUTOR QUE CRIA E MOVIMENTA A PASTA
+email e name
+git config --global user.email
+git config --global user.name
+
+__________________________________________________________________
+
+#COMANDO GIT INIT (CRIA UM REPOSITORIO)
+
+#sempre tem que dar um COMMIT EM UMA PASTA para poder mover para um repositorio remoto
+
+
+_________________________________________________________________
+
+#enviar esse arquivo alterado lá para o link do githubg (remoto)
+git push origin master
+
+
+deisi@FER-PC MINGW64 /c/workspace/livro-receitas (master)
+$ git push origin master
+_________________________________________________________________
+
+PARA 'MESCLAR' as alterações que foram feitas no remote com o do desktop PULL -> PUXAR
+#(vai puxar as alterações do remote para o desktop)o git vai tentar juntas essas duas alterações
+
+usa o comando 
+git pull origin master
+
+_________________________________________________________________
+
+MENSAGEM DE ERRRO: QUE ALGUEM EMPURROU ALGUMA COISA NO REPOSITORIO REMOTO
+E O DO DESKTOP NAO RECONHECEU
+
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/Deisiane-Cuellar/livro-receitas.git'
+
+_________________________________________________________________
+
+#clonar um repositorio do GITHUB
+-> vai no githhub -> seleciona o repositorio -> vai code -> copia o link https do 
+repositorio´
+
+# git clone https://github.com/Deisiane-Cuellar/Desafio-Github-DIO.git
+
+'abre o gibash no desktop na pasta em que quer criar o clone - comando git clone
+
+deisi@FER-PC MINGW64 /c/workspace
+$ cd Desafio-DIO-Repositorio
+
+_________________________________________________________________
+
+#SEMPRE QUE Alterar ou add um arquivo tem que criar um -m com alguma frase
+$ git commit -m "Anotações do Curso de GIT/GITHUB"
+
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+_________________________________________________________________
+
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
 
